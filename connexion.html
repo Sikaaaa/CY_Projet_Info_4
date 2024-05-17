@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title> Votre plateforme de conseils </title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+<a href="accueil.html"> Accueil </a> <br>
+<a href="conseils.html"> Conseils </a> <br>
+<a href="recherche.html"> Page de recherches </a> <br>
+<a href="monespace.html"> Inscription - Connexion </a> <br>
+<a href="deconnexion.html"> Déconnexion </a> <br>
+
+<form action="connexion.php" method="post">
+    <h3 >Connexion </h3>
+    <div class="form-group">
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+    </div>
+    <div class="form-group">
+        <label for="username">Nom d'utilisateur:</label>
+        <input type="text" id="username" name="username" required>
+    </div>
+    <div class="form-group">
+        <label for="motdepasse">Mot de passe:</label>
+        <input type="password" id="password" name="password" required>
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Se connecter">
+    </div>
+</form>
+
+</body>
+</html>
