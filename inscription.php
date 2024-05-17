@@ -18,7 +18,7 @@
             $file = '/users.txt';
 
             // Enregistrer les données dans le fichier
-            file_put_contents($file, $data, FILE_APPEND | LOCK_EX);
+            file_put_contents($file, $data, FILE_APPEND | LOCK_EX); //file_put_content permet d'ouvrir un fichier et d'écrire dedans sans rappeler de fonction
 
             echo "Inscription réussie !"; } 
         else {
