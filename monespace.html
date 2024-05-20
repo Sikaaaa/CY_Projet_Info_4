@@ -1,20 +1,81 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 <head>
-    <title> Votre plateforme de conseils </title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Votre plateforme de conseils</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        header {
+            width: 100%;
+            background-color: #010008;
+            padding: 10px 0;
+            text-align: center;
+            color: white;
+        }
+        nav {
+            display: flex;
+            justify-content: center;
+            margin: 20px 0;
+        }
+        nav a {
+            text-decoration: none;
+            color: #5c5e5c;
+            font-weight: bold;
+            margin: 0 15px;
+        }
+        nav a:hover {
+            text-decoration: underline;
+        }
+        main {
+            text-align: center;
+            padding: 20px;
+            background-color: white;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 80%;
+            max-width: 800px;
+        }
+        h1 {
+            color: #f7f7f7;
+        }
+        h2, h3, p {
+            font-size: 16px;
+        }
+        .content-frame {
+            border: 1px solid #ccc;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 5px;
+            background-color: #fafafa;
+        }
+    </style>
 </head>
-
 <body>
-<a href="accueil.html"> Accueil </a> <br>
-<a href="conseils.html"> Conseils </a> <br>
-<a href="recherche.html"> Page de recherches </a> <br>
-<a href="monespace.html"> Inscription - Connexion </a> <br>
-<a href="deconnexion.html"> Déconnexion </a> <br>
-
-<p><h3> Page d'inscription et de connexion à la plateforme </h3> </p>
-<a href="inscription.html"> Inscription </a> <br>
-<a href="connexion.html"> Connexion </a> <br>
-
-
+    <header>
+        <h1>CY-conseils</h1>
+    </header>
+    <nav>
+        <a href="accueil.html">Accueil</a>
+        <a href="conseils.html">Conseils</a>
+        <a href="recherche.html">Page de recherches</a>
+        <a href="monespace.html">Inscription - Connexion</a>
+        <a href="deconnexion.html">Déconnexion</a>
+    </nav>
+    <main>
+        <h2>Page d'inscription et de connexion à la plateforme</h2>
+        <div class="content-frame">
+            <a href="inscription.html">Inscription</a> <br>
+            <a href="connexion.html">Connexion</a> <br>
+        </div>
+    </main>
 </body>
 </html>
