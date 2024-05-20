@@ -24,3 +24,4 @@ echo "Vous avez été déconnecté. ";
 header('Location: /accueil.html');
 exit();
 
+*
