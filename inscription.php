@@ -15,13 +15,12 @@
             $data = "Prénom : $first_name, Nom : $name, Email : $email, Mot de passe: $hashed_pass\n";
 
             // Chemin vers le fichier texte où les données seront enregistrées
-            $file = '/users.txt';
+            $file = 'users.csv';
 
             // Enregistrer les données dans le fichier
             file_put_contents($file, $data, FILE_APPEND | LOCK_EX); //file_put_content permet d'ouvrir un fichier et d'écrire dedans sans rappeler de fonction
 
-            echo "Inscription réussie !"; } 
-        else {
-            echo "Inscription non réussie";
-        }
-?>
+            echo "Inscription réussie !"; }
+
+            header('Location: accueil.html');
+            exit;
