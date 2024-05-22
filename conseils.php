@@ -1,8 +1,10 @@
 <?php
 session_start();
+
+
 // Fonction pour enregistrer l'article dans un fichier CSV
 function save_article($title, $author, $content) {
-    $file = 'articles.csv';
+    $file = './data/articles.csv';
 
     // Ouverture du fichier en mode ajout
     $handle = fopen($file, 'a');
@@ -17,18 +19,20 @@ function save_article($title, $author, $content) {
     }
 }
 
+
 // Vérifier si le formulaire a été soumis
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $title = $_POST['title'];
     $author = $_POST['author'];
     $content = $_POST['content'];
 
-    // Enregistrer l'article
-    if (save_article($title, $author, $content)) {
-        echo "Article soumis avec succès!";
-    } else {
-        echo "Erreur lors de la soumission de l'article.";
-    }
+
+// Enregistrer l'article en vérifiant que l'utilisateur est connecté sinon 
+if (save_article($title, $author, $content)) {
+    echo "Article soumis avec succès!";
+} else {
+    echo "Erreur lors de la soumission de l'article.";
+}
 } 
 
 
@@ -57,8 +61,6 @@ function get_articles() {
     return $articles;
 }
 
-// Récupérer les articles
-$articles = get_articles();
 ?>
 
 <!DOCTYPE html>
@@ -77,16 +79,15 @@ $articles = get_articles();
     <nav>
         <a href="accueil.php">Accueil</a>
         <a href="conseils.php">Conseils</a>
-        <a href="recherche.html">Page de recherches</a>
+        <a href="recherche.php">Page de recherches</a>
         <a href="monespace.html">Inscription - Connexion</a>
         <a href="deconnexion.php">Déconnexion</a>
     </nav>
     <main>
-        //rajouter la barre de recherche dans les articles
-        //rajouter un lien qui amène à un formulaire pour créer des articles 
 
         <h2>Conseils et ressources</h2>
         <p>Ceci est la page de conseils et de ressources</p>
+        <p> Attention, il faut être connecté pour pouvoir poster un article !</p>
         <form action="conseils.php" method="post">
         <label for="title">Titre de l'article:</label><br>
         <input type="text" id="title" name="title" required><br><br>

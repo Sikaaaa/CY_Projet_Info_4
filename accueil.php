@@ -1,4 +1,7 @@
 <?php
+
+session_start();
+
 // Fonction pour lire les articles depuis le fichier CSV
 function get_articles() {
     $file = './data/articles.csv';
@@ -26,6 +29,9 @@ function get_articles() {
 
 // Récupérer les articles
 $articles = get_articles();
+
+//inverser l'odre pour que le dernier créer soit en premier
+$articles = array_reverse($articles);
 ?>
 
 <!DOCTYPE html>
@@ -34,7 +40,7 @@ $articles = get_articles();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Votre plateforme de conseils</title>
-    <link rel="stylesheet" href="./css/syle.css">
+    <link rel="stylesheet" href="./css/style.css">
   
 </head>
 <body>
@@ -44,14 +50,14 @@ $articles = get_articles();
     <nav>
         <a href="accueil.php">Accueil</a>
         <a href="conseils.php">Conseils</a>
-        <a href="recherche.html">Page de recherches</a>
+        <a href="recherche.php">Page de recherches</a>
         <a href="monespace.html">Inscription - Connexion</a>
         <a href="deconnexion.php">Déconnexion</a>
     </nav>
     <main>
         <h2> ~ Bienvenue sur CY-conseils ~ </h2>
         <p><h4> ~ C'est une plateforme de partage et de stockage d'astuces de la vie quotidienne ~ </h4></p>
-        <p> Voici les 3 astuces les plus populaires : </p>
+        <p> Voici les dernières astuces postées par les utilisateurs : </p>
         <?php if (!empty($articles)): ?>
         <?php foreach ($articles as $article): ?>
             <h2><?php echo htmlspecialchars($article['title']); ?></h2>
@@ -63,17 +69,6 @@ $articles = get_articles();
         <p>Aucun article n'a été soumis pour le moment.</p>
     <?php endif; ?>
 
-        <div class="content-frame">
-            <h3>Astuce 1</h3>
-            <p> # </p>
-        </div>
-        <div class="content-frame">
-            <h3>Astuce 2</h3>
-            <p> # </p>
-        </div>
-        <div class="content-frame">
-            <h3>Astuce 3</h3>
-            <p> # </p>
         </div>
     </main>
 </body>
