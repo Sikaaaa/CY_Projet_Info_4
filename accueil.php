@@ -34,7 +34,7 @@ $articles = get_articles();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Votre plateforme de conseils</title>
-    <link rel="stylesheet" href="./css/accueil.css">
+    <link rel="stylesheet" href="./css/syle.css">
   
 </head>
 <body>
