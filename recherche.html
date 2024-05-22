@@ -2,6 +2,9 @@
 <html>
 <head>
     <title> Votre plateforme de conseils </title>
+        <link rel="stylesheet" href="style.css">
+
+    
 </head>
 
 <body>
@@ -11,7 +14,14 @@
 <a href="monespace.html"> Inscription - Connexion </a> <br>
 <a href="deconnexion.php"> Déconnexion </a> <br>
 
-<p> Ceci est la page de recherche </p>
+        <main class="main-search">
+        <h2><p> Ceci est la page de recherche </p></h2>
+            <form   action="/search-result" method="get">
+                <label for="search">recherche de conseils :</label>
+                <input type="text" id="search" name="conseils"  required>
+                <input type="submit" value="rechercher">
+            </form>
+        </main>
 
 </body>
 </html>
