@@ -3,6 +3,7 @@
 //démarrage de la session
 session_start();
 
+
 // Fonction pour lire les articles depuis le fichier CSV
 function get_articles() {
     $file = './data/articles.csv';

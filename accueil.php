@@ -2,6 +2,10 @@
 
 session_start();
 
+if (isset($_SESSION['user'])) {
+    $session_info = $_SESSION['user'];
+} 
+
 // Fonction pour lire les articles depuis le fichier CSV
 function get_articles() {
     $file = './data/articles.csv';

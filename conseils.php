@@ -1,6 +1,10 @@
 <?php
 session_start();
 
+if (isset($_SESSION['user'])) {
+    $session_info = $_SESSION['user'];
+} 
+
 
 // Fonction pour enregistrer l'article dans un fichier CSV
 function save_article($title, $author, $content) {
@@ -28,10 +32,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 
 // Enregistrer l'article en vérifiant que l'utilisateur est connecté sinon 
-if (save_article($title, $author, $content)) {
+if (isset($_SESSION['user'])){
+    echo "Veuillez vous connecter";
+}
+elseif (save_article($title, $author, $content) && (isset($_SESSION['user']))) {
     echo "Article soumis avec succès!";
 } else {
-    echo "Erreur lors de la soumission de l'article.";
+    echo "Erreur lors de la soumission de l'article, Verifiez si vous êtes connecté
+    ";
 }
 } 
 
