@@ -20,7 +20,8 @@ function get_articles() {
                 $articles[] = [
                     'title' => $data[0],
                     'author' => $data[1],
-                    'content' => $data[2]
+                    'categorie' => $data[2],
+                    'content' => $data[3]
                 ];
             }
             fclose($handle);
@@ -35,7 +36,8 @@ function search_articles($articles, $mot) {
 
     foreach ($articles as $article) {
         if (stripos($article['title'], $mot) !== false || 
-            stripos($article['author'], $mot) !== false || 
+            stripos($article['author'], $mot) !== false ||
+            stripos($article['categorie'], $mot) !== false || 
             stripos($article['content'], $mot) !== false) {
             $filtered_articles[] = $article;
         }
@@ -91,6 +93,7 @@ if (isset($_GET['search']) && !empty($_GET['search'])) {
                 <?php foreach ($articles as $article): ?>
                     <h3><?php echo htmlspecialchars($article['title']); ?></h3>
                     <p><em>par <?php echo htmlspecialchars($article['author']); ?></em></p>
+                    <p><?php echo htmlspecialchars($article['categorie']); ?></p>
                     <p><?php echo nl2br(htmlspecialchars($article['content'])); ?></p>
                     <hr>
                 <?php endforeach; ?>

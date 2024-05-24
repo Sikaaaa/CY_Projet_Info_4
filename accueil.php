@@ -22,7 +22,8 @@ function get_articles() {
                 $articles[] = [
                     'title' => $data[0],
                     'author' => $data[1],
-                    'content' => $data[2]
+                    'categorie' => $data[2],
+                    'content' => $data[3]
                 ];
             }
             fclose($handle);
@@ -60,12 +61,15 @@ $articles = array_reverse($articles);
     </nav>
     <main>
         <h2> ~ Bienvenue sur CY-conseils ~ </h2>
+        <h3><?php if(isset($_SESSION['user'])) 
+            echo $session_info['email'] ;?></h3>
         <p><h4> ~ C'est une plateforme de partage et de stockage d'astuces de la vie quotidienne ~ </h4></p>
         <p> Voici les dernières astuces postées par les utilisateurs : </p>
         <?php if (!empty($articles)): ?>
         <?php foreach ($articles as $article): ?>
             <h2><?php echo htmlspecialchars($article['title']); ?></h2>
             <p><em>par <?php echo htmlspecialchars($article['author']); ?></em></p>
+            <p> <?php echo htmlspecialchars($article['categorie']); ?> </p>
             <p><?php echo nl2br(htmlspecialchars($article['content'])); ?></p>
             <hr>
         <?php endforeach; ?>

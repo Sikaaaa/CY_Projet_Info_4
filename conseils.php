@@ -7,7 +7,7 @@ if (isset($_SESSION['user'])) {
 
 
 // Fonction pour enregistrer l'article dans un fichier CSV
-function save_article($title, $author, $content) {
+function save_article($title, $author, $categorie, $content) {
     $file = './data/articles.csv';
 
     // Ouverture du fichier en mode ajout
@@ -15,7 +15,7 @@ function save_article($title, $author, $content) {
 
     if ($handle) {
         // Écrire l'article dans le fichier
-        fputcsv($handle, [$title, $author, $content]);
+        fputcsv($handle, [$title, $author, $categorie, $content]);
         fclose($handle);
         return true;
     } else {
@@ -28,14 +28,12 @@ function save_article($title, $author, $content) {
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $title = $_POST['title'];
     $author = $_POST['author'];
+    $categorie = $_POST['categorie'];
     $content = $_POST['content'];
 
 
 // Enregistrer l'article en vérifiant que l'utilisateur est connecté sinon 
-if (isset($_SESSION['user'])){
-    echo "Veuillez vous connecter";
-}
-elseif (save_article($title, $author, $content) && (isset($_SESSION['user']))) {
+if (save_article($title, $author, $categorie, $content) && (isset($_SESSION['user']))) {
     echo "Article soumis avec succès!";
 } else {
     echo "Erreur lors de la soumission de l'article, Verifiez si vous êtes connecté
@@ -60,7 +58,8 @@ function get_articles() {
                 $articles[] = [
                     'title' => $data[0],
                     'author' => $data[1],
-                    'content' => $data[2]
+                    'categorie' => $data[2],
+                    'content' => $data[3]
                 ];
             }
             fclose($handle);
@@ -94,6 +93,8 @@ function get_articles() {
     <main>
 
         <h2>Conseils et ressources</h2>
+        <h3><?php if (isset($_SESSION)){
+            echo $session_info['email'] ;} ?></h3>
         <p>Ceci est la page de conseils et de ressources</p>
         <p> Attention, il faut être connecté pour pouvoir poster un article !</p>
         <form action="conseils.php" method="post">
@@ -102,6 +103,13 @@ function get_articles() {
         
         <label for="author">Auteur:</label><br>
         <input type="text" id="author" name="author" required><br><br>
+
+        <label for="categorie">Catégorie:</label><br><br>
+        <select name = "categorie"> 
+                            <option value ="cuisine"> Cuisine </option>
+                            <option value ="sport"> Sport </option>
+                            <option value ="culture"> Culture </option>
+                            <option value ="educatif"> Educatif </option> </select><br><br>
         
         <label for="content">Contenu de l'article:</label><br>
         <textarea id="content" name="content" rows="10" cols="50" required></textarea><br><br>

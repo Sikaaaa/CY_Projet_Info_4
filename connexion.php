@@ -2,58 +2,61 @@
 
 session_start();
 
-
-// Fonction pour vérifier les informations de connexion
-function verif($email, $password) {
+// Function to verify login information
+function verif($email, $password)
+{
     $file = './data/users.csv';
 
-    // Lire le fichier ligne par ligne
+    // Read the file line by line
     $lines = file($file, FILE_IGNORE_NEW_LINES);
 
-    foreach ($lines as $elem) {
-        // Analyser les données de chaque ligne
-        list($stored_first_name, $stored_name, $stored_email, $stored_pass) = explode(', ', $elem);
-        
-        // Nettoyer les données
-        $stored_email = trim(str_replace("Email : ", "", $stored_email));
-        $stored_pass = trim(str_replace("Mot de passe : ", "", $stored_pass));
+    foreach ($lines as $line) {
+        // Extract the email and password from each line
+        preg_match('/Email : ([^,]+), Mot de passe: ([^\s]+)/', $line, $matches);
 
-        // Vérifier si les données correspondent
-        if ($stored_email == $email && $password == $stored_pass) {
-            return true;
+        if (count($matches) == 3) {
+            $stored_email = trim($matches[1]);
+            $stored_pass = trim($matches[2]);
+
+            // Check if the data matches
+            if ($stored_email == $email && $stored_pass == $password) {
+                return true;
+            }
         }
     }
     return false;
 }
 
-// Vérifier si le formulaire a été soumis
+// Check if the form has been submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = $_POST['email'];
-    $pass = $_POST['password'];
+    $password = $_POST['password'];
 
-    if (verif($email, $pass)) {
-        $_SESSION['user'] = array('email'=> $email,'password'=> $pass);
+    if (verif($email, $password)) {
+        $_SESSION['user'] = array(
+            'email' => $email,
+            'password' => $password
+        );
         error_log("Connexion réussie ! Bienvenue, $email.");
-        echo "Connexion réussie ! Bienvenue, $email.";
-    } else {
         header('Location: accueil.php');
-        exit;
+        exit();
+    } else {
+        error_log("Vous n'êtes pas connecté");
+        echo "Erreur : Email ou mot de passe incorrect.";
     }
-} //else {
-    //echo "Méthode de requête non autorisée.";
-//}
-
+}
 ?>
 
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./css/style.css">
     <title>Votre plateforme de conseils</title>
-   
 </head>
+
 <body>
     <header>
         <h1>CY-conseils</h1>
@@ -84,5 +87,5 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </div>
     </main>
 </body>
-</html>
 
+</html>
