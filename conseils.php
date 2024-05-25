@@ -5,6 +5,9 @@ if (isset($_SESSION['user'])) {
     $session_info = $_SESSION['user'];
 }
 
+if (!isset($_SESSION['user'])){
+    echo "Veuillez vous connecter";
+}
 // Fonction pour enregistrer l'article dans un fichier CSV
 function save_article($title, $author, $categorie, $content) {
     $file = './data/articles.csv';
@@ -48,27 +51,22 @@ function get_user_first_name($email)
     return false;
 }
 
-
+if(isset($_SESSION['user'])){
 // Vérifier si le formulaire a été soumis
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    if (!isset($_SESSION['user'])) {
-        // Rediriger vers la page de connexion si l'utilisateur n'est pas connecté
-        header('Location: connexion.php');
-        exit();
-    }
-
     $title = $_POST['title'];
-    $author = get_user_first_name(($_SESSION['user']['email']));
+    $author = get_user_first_name($_SESSION['user']['email']);
     $categorie = $_POST['categorie'];
     $content = $_POST['content'];
 
     // Enregistrer l'article
+
     if (save_article($title, $author, $categorie, $content)) {
         echo "Article soumis avec succès!";
     } else {
         echo "Erreur lors de la soumission de l'article.";
     }
-}
+}}
 
 // Fonction pour lire les articles depuis le fichier CSV
 function get_articles() {
