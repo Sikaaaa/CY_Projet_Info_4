@@ -22,9 +22,8 @@
 
             echo "Inscription réussie !"; }
 
-            //header('Location: accueil.php');
-            //exit;
 ?>
+
 
 <!DOCTYPE html>
 <html lang="fr">
