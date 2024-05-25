@@ -1,13 +1,17 @@
 <?php
+// Démarrer la session pour suivre les utilisateurs connectés
 session_start();
 
+// Si l'utilisateur est connecté, récupérer les informations de session
 if (isset($_SESSION['user'])) {
     $session_info = $_SESSION['user'];
 }
 
+// Si l'utilisateur n'est pas connecté, afficher un message d'invitation à se connecter
 if (!isset($_SESSION['user'])){
     echo "Veuillez vous connecter";
 }
+
 // Fonction pour enregistrer l'article dans un fichier CSV
 function save_article($title, $author, $categorie, $content) {
     $file = './data/articles.csv';
@@ -15,8 +19,8 @@ function save_article($title, $author, $categorie, $content) {
     // Ouverture du fichier en mode ajout
     $handle = fopen($file, 'a');
 
+    // Si le fichier est ouvert avec succès, écrire l'article dans le fichier
     if ($handle) {
-        // Écrire l'article dans le fichier
         fputcsv($handle, [$title, $author, $categorie, $content]);
         fclose($handle);
         return true;
@@ -25,48 +29,46 @@ function save_article($title, $author, $categorie, $content) {
     }
 }
 
-function get_user_first_name($email)
-{
+// Fonction pour récupérer le prénom de l'utilisateur à partir de son email
+function get_user_first_name($email) {
     $file = './data/users.csv';
 
-    // Read the file line by line
+    // Lire le fichier ligne par ligne
     $lines = file($file, FILE_IGNORE_NEW_LINES);
 
     foreach ($lines as $line) {
-        // Extract the user information from each line
+        // Extraire les informations utilisateur de chaque ligne
         preg_match('/Prénom : ([^,]+), Nom : ([^,]+), Email : ([^,]+), Mot de passe: ([^\s]+)/', $line, $matches);
 
+        // Si le format des données est correct, vérifier si l'email correspond
         if (count($matches) == 5) {
             $stored_first_name = trim($matches[1]);
-            $stored_name = trim($matches[2]);
             $stored_email = trim($matches[3]);
-            $stored_pass = trim($matches[4]);
 
-            // Check if the email matches
             if ($stored_email == $email) {
-                return $stored_first_name;
+                return $stored_first_name; // Retourner le prénom si l'email correspond
             }
         }
     }
-    return false;
+    return false; // Retourner false si aucun prénom correspondant n'est trouvé
 }
 
+// Si l'utilisateur est connecté et que le formulaire a été soumis
 if(isset($_SESSION['user'])){
-// Vérifier si le formulaire a été soumis
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $title = $_POST['title'];
-    $author = get_user_first_name($_SESSION['user']['email']);
-    $categorie = $_POST['categorie'];
-    $content = $_POST['content'];
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        $title = $_POST['title'];
+        $author = get_user_first_name($_SESSION['user']['email']);
+        $categorie = $_POST['categorie'];
+        $content = $_POST['content'];
 
-    // Enregistrer l'article
-
-    if (save_article($title, $author, $categorie, $content)) {
-        echo "Article soumis avec succès!";
-    } else {
-        echo "Erreur lors de la soumission de l'article.";
+        // Enregistrer l'article et afficher un message de succès ou d'erreur
+        if (save_article($title, $author, $categorie, $content)) {
+            echo "Article soumis avec succès!";
+        } else {
+            echo "Erreur lors de la soumission de l'article.";
+        }
     }
-}}
+}
 
 // Fonction pour lire les articles depuis le fichier CSV
 function get_articles() {
@@ -78,8 +80,8 @@ function get_articles() {
         // Ouverture du fichier en mode lecture
         $handle = fopen($file, 'r');
 
+        // Lire chaque ligne du fichier et ajouter à la liste des articles
         if ($handle) {
-            // Lire chaque ligne du fichier
             while (($data = fgetcsv($handle)) !== FALSE) {
                 $articles[] = [
                     'title' => $data[0],
@@ -91,10 +93,9 @@ function get_articles() {
             fclose($handle);
         }
     }
-    return $articles;
+    return $articles; // Retourner la liste des articles
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -108,18 +109,27 @@ function get_articles() {
         <h1>CY-conseils</h1>
     </header>
     <nav>
+        <!-- Menu de navigation du site -->
         <a href="accueil.php">Accueil</a>
         <a href="conseils.php">Conseils</a>
         <a href="recherche.php">Page de recherches</a>
-        <a href="profil.php"> Profil</a>
+        <a href="profil.php">Profil</a>
         <a href="monespace.html">Inscription - Connexion</a>
         <a href="deconnexion.php">Déconnexion</a>
     </nav>
     <main>
         <h2>Conseils et ressources</h2>
-        <h3><?php if(isset($_SESSION['user'])) echo $session_info['email']; ?></h3>
+        <h3>
+            <?php 
+            // Afficher l'email de l'utilisateur connecté
+            if(isset($_SESSION['user'])) 
+                echo $session_info['email']; 
+            ?>
+        </h3>
         <p>Ceci est la page de conseils et de ressources</p>
         <p> Attention, il faut être connecté pour pouvoir poster un article !</p>
+
+        <!-- Formulaire de soumission d'article -->
         <form action="conseils.php" method="post">
             <label for="title">Titre de l'article:</label><br>
             <input type="text" id="title" name="title" required><br><br>

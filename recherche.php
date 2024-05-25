@@ -1,8 +1,6 @@
 <?php
-
-//démarrage de la session
+// Démarrage de la session
 session_start();
-
 
 // Fonction pour lire les articles depuis le fichier CSV
 function get_articles() {
@@ -71,17 +69,20 @@ if (isset($_GET['search']) && !empty($_GET['search'])) {
     <header>
         <h1>CY-conseils</h1>
     </header>
+        <!-- Barre de navigation -->
     <nav>
-        <a href="accueil.php">Accueil</a>
-        <a href="conseils.php">Conseils</a>
-        <a href="recherche.php">Page de recherches</a>
-        <a href="profil.php"> Profil</a>
-        <a href="monespace.html">Inscription - Connexion</a>
-        <a href="deconnexion.php">Déconnexion</a>
+    <a href="accueil.php">Accueil</a>
+    <a href="conseils.php">Conseils</a>
+    <a href="recherche.php">Page de recherches</a>
+    <a href="profil.php"> Profil</a>
+    <a href="monespace.html">Inscription - Connexion</a>
+    <a href="deconnexion.php">Déconnexion</a>
     </nav>
+
 
     <main class="main-search">
         <h2>Ceci est la page de recherche</h2>
+        <!-- Formulaire de recherche -->
         <form action="recherche.php" method="get">
             <label for="search">Recherche de conseils :</label>
             <input type="text" id="search" name="search" required>
@@ -91,6 +92,7 @@ if (isset($_GET['search']) && !empty($_GET['search'])) {
         <section>
             <h2>Résultats de recherche :</h2>
             <?php if (!empty($articles)): ?>
+                <!-- Affichage des articles trouvés -->
                 <?php foreach ($articles as $article): ?>
                     <h3><?php echo htmlspecialchars($article['title']); ?></h3>
                     <p><em>par <?php echo htmlspecialchars($article['author']); ?></em></p>
@@ -99,6 +101,7 @@ if (isset($_GET['search']) && !empty($_GET['search'])) {
                     <hr>
                 <?php endforeach; ?>
             <?php else: ?>
+                <!-- Affichage si aucun article n'a été trouvé -->
                 <p>Aucun article n'a été trouvé pour votre recherche.</p>
             <?php endif; ?>
         </section>

@@ -1,8 +1,8 @@
 <?php
-session_start();
+session_start(); // Démarre une nouvelle session ou reprend une session existante
 
-if (isset($_SESSION['user'])) {
-    $session_info = $_SESSION['user'];
+if (isset($_SESSION['user'])) { // Vérifie si l'utilisateur est connecté
+    $session_info = $_SESSION['user']; // Récupère les informations de session de l'utilisateur
 } 
 
 // Fonction pour récupérer les données de l'utilisateur à partir de l'email
@@ -10,11 +10,11 @@ function get_user_data($email)
 {
     $file = './data/users.csv';
 
-    // Read the file line by line
+    // Lit le fichier ligne par ligne
     $lines = file($file, FILE_IGNORE_NEW_LINES);
 
     foreach ($lines as $line) {
-        // Extract the user information from each line
+        // Extrait les informations de l'utilisateur de chaque ligne
         preg_match('/Prénom : ([^,]+), Nom : ([^,]+), Email : ([^,]+), Mot de passe: ([^\s]+)/', $line, $matches);
 
         if (count($matches) == 5) {
@@ -23,7 +23,7 @@ function get_user_data($email)
             $stored_email = trim($matches[3]);
             $stored_pass = trim($matches[4]);
 
-            // Check if the data matches
+            // Vérifie si les données correspondent
             if ($stored_email == $email) {
                 return [
                     'first_name' => $stored_first_name,
@@ -38,14 +38,14 @@ function get_user_data($email)
 
 if (isset($_SESSION['user']) && isset($_SESSION['user']['email'])) {
     $user_email = $_SESSION['user']['email'];
-    $user_data = get_user_data($user_email);
+    $user_data = get_user_data($user_email); // Récupère les données de l'utilisateur
 
     if ($user_data) {
         $first_name = $user_data['first_name'];
         $name = $user_data['name'];
         $email = $user_data['email'];
 
-        // Récupérer les articles de l'utilisateur
+        // Récupère les articles de l'utilisateur
         $articles = get_user_articles($first_name);
     } else {
         echo "Impossible de récupérer les données de l'utilisateur.";
@@ -54,19 +54,20 @@ if (isset($_SESSION['user']) && isset($_SESSION['user']['email'])) {
     echo "Veuillez vous connecter.";
 }
 
+// Fonction pour récupérer les articles de l'utilisateur
 function get_user_articles($author) {
     $file = './data/articles.csv';
     $articles = [];
 
-    // Vérifier si le fichier existe
+    // Vérifie si le fichier existe
     if (file_exists($file)) {
-        // Ouverture du fichier en mode lecture
+        // Ouvre le fichier en mode lecture
         $handle = fopen($file, 'r');
 
         if ($handle) {
-            // Lire chaque ligne du fichier
+            // Lit chaque ligne du fichier
             while (($data = fgetcsv($handle)) !== FALSE) {
-                // Vérifier si l'auteur de l'article correspond au prénom de l'utilisateur
+                // Vérifie si l'auteur de l'article correspond au prénom de l'utilisateur
                 if ($data[1] === $author) {
                     $articles[] = [
                         'title' => $data[0],
@@ -95,14 +96,16 @@ function get_user_articles($author) {
     <header>
         <h1>CY-conseils</h1>
     </header>
+        <!-- Barre de navigation -->
     <nav>
-        <a href="accueil.php">Accueil</a>
-        <a href="conseils.php">Conseils</a>
-        <a href="recherche.php">Page de recherches</a>
-        <a href="profil.php"> Profil</a>
-        <a href="monespace.html">Inscription - Connexion</a>
-        <a href="deconnexion.php">Déconnexion</a>
+    <a href="accueil.php">Accueil</a>
+    <a href="conseils.php">Conseils</a>
+    <a href="recherche.php">Page de recherches</a>
+    <a href="profil.php"> Profil</a>
+    <a href="monespace.html">Inscription - Connexion</a>
+    <a href="deconnexion.php">Déconnexion</a>
     </nav>
+
     <h2>Votre profil utilisateur</h2>
     <h3><?php if(isset($_SESSION['user'])) echo $session_info['email'] ;?></h3>
     <p> Prénom : <?php echo isset($first_name) ? $first_name : ''; ?></p>

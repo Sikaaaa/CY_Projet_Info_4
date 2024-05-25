@@ -5,11 +5,9 @@ session_start();
 // Détruire toutes les variables de session
 $_SESSION = array();
 
-// détruire la session.
+// Détruire la session
 session_destroy();
-
 ?>
-
 
 <!DOCTYPE html>
 <html lang="fr">
@@ -18,17 +16,17 @@ session_destroy();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./css/style.css">
     <title>Votre plateforme de conseils</title>
-
 </head>
 <body>
     <header>
         <h1>CY-conseils</h1>
     </header>
     <nav>
+        <!-- Menu de navigation du site -->
         <a href="accueil.php">Accueil</a>
         <a href="conseils.php">Conseils</a>
         <a href="recherche.php">Page de recherches</a>
-        <a href="profil.php"> Profil</a>
+        <a href="profil.php">Profil</a>
         <a href="monespace.html">Inscription - Connexion</a>
         <a href="deconnexion.php">Déconnexion</a>
     </nav>
@@ -38,4 +36,3 @@ session_destroy();
     </main>
 </body>
 </html>
-
