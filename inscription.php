@@ -45,7 +45,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") { // Vérifie si la méthode de requê
         <a href="recherche.php">Page de recherches</a>
         <a href="profil.php"> Profil</a>
         <a href="monespace.html">Inscription - Connexion</a>
-        <a href="deconnexion.php">Déconnexion</a>
+               <a class="logout" href="deconnexion.php">Déconnexion</a>    
+
     </nav>
     <main>
         <h2>Formulaire d'inscription</h2>
