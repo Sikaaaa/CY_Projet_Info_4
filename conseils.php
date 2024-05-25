@@ -115,7 +115,8 @@ function get_articles() {
         <a href="recherche.php">Page de recherches</a>
         <a href="profil.php">Profil</a>
         <a href="monespace.html">Inscription - Connexion</a>
-        <a href="deconnexion.php">Déconnexion</a>
+               <a class="logout" href="deconnexion.php">Déconnexion</a>    
+
     </nav>
     <main>
         <h2>Conseils et ressources</h2>
