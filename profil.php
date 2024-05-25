@@ -103,7 +103,8 @@ function get_user_articles($author) {
     <a href="recherche.php">Page de recherches</a>
     <a href="profil.php"> Profil</a>
     <a href="monespace.html">Inscription - Connexion</a>
-    <a href="deconnexion.php">Déconnexion</a>
+           <a class="logout" href="deconnexion.php">Déconnexion</a>    
+
     </nav>
 
     <h2>Votre profil utilisateur</h2>
