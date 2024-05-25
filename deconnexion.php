@@ -28,6 +28,7 @@ session_destroy();
         <a href="accueil.php">Accueil</a>
         <a href="conseils.php">Conseils</a>
         <a href="recherche.php">Page de recherches</a>
+        <a href="profil.php"> Profil</a>
         <a href="monespace.html">Inscription - Connexion</a>
         <a href="deconnexion.php">Déconnexion</a>
     </nav>
