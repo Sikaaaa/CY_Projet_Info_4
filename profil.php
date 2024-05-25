@@ -36,8 +36,6 @@ function get_user_data($email)
     return false;
 }
 
-
-
 if (isset($_SESSION['user']) && isset($_SESSION['user']['email'])) {
     $user_email = $_SESSION['user']['email'];
     $user_data = get_user_data($user_email);
@@ -46,15 +44,17 @@ if (isset($_SESSION['user']) && isset($_SESSION['user']['email'])) {
         $first_name = $user_data['first_name'];
         $name = $user_data['name'];
         $email = $user_data['email'];
+
+        // Récupérer les articles de l'utilisateur
+        $articles = get_user_articles($first_name);
     } else {
         echo "Impossible de récupérer les données de l'utilisateur.";
     }
 } else {
     echo "Veuillez vous connecter.";
-    exit;
 }
 
-function get_user_articles($email) {
+function get_user_articles($author) {
     $file = './data/articles.csv';
     $articles = [];
 
@@ -66,8 +66,8 @@ function get_user_articles($email) {
         if ($handle) {
             // Lire chaque ligne du fichier
             while (($data = fgetcsv($handle)) !== FALSE) {
-                // Vérifier si l'auteur de l'article correspond à l'email de l'utilisateur
-                if ($data[1] === $email) {
+                // Vérifier si l'auteur de l'article correspond au prénom de l'utilisateur
+                if ($data[1] === $author) {
                     $articles[] = [
                         'title' => $data[0],
                         'author' => $data[1],
@@ -81,27 +81,6 @@ function get_user_articles($email) {
     }
     return $articles;
 }
-
-// Vérifier si l'utilisateur est connecté
-if (isset($_SESSION['user']) && isset($_SESSION['user']['email'])) {
-    $user_email = $_SESSION['user']['email'];
-    $user_data = get_user_data($user_email);
-
-    if ($user_data) {
-        $first_name = $user_data['first_name'];
-        $name = $user_data['name'];
-        $email = $user_data['email'];
-
-        // Récupérer les articles de l'utilisateur
-        $articles = get_user_articles($email);
-    } else {
-        echo "Impossible de récupérer les données de l'utilisateur.";
-    }
-} else {
-    echo "Veuillez vous connecter.";
-    exit;
-}
-
 ?>
 
 <!DOCTYPE html>
@@ -125,25 +104,24 @@ if (isset($_SESSION['user']) && isset($_SESSION['user']['email'])) {
         <a href="deconnexion.php">Déconnexion</a>
     </nav>
     <h2>Votre profil utilisateur</h2>
-    <h3><?php if(isset($_SESSION['user'])) 
-            echo $session_info['email'] ;?></h3>
+    <h3><?php if(isset($_SESSION['user'])) echo $session_info['email'] ;?></h3>
     <p> Prénom : <?php echo isset($first_name) ? $first_name : ''; ?></p>
     <p> Nom : <?php echo isset($name) ? $name : ''; ?></p>
     <p> Email : <?php echo isset($email) ? $email : ''; ?></p>
 
-
     <h2>Vos articles</h2>
-        <?php if (!empty($articles)): ?>
-            <ul>
-            <?php foreach ($articles as $article): ?>
-                <li>
+    <?php if (!empty($articles)): ?>
+        <ul>
+        <?php foreach ($articles as $article): ?>
+            <li>
                 <h3><?php echo htmlspecialchars($article['title']); ?></h3>
+                <p> <?php echo htmlspecialchars($article['categorie']); ?> </p>
                 <p><?php echo htmlspecialchars($article['content']); ?></p>
-                </li>
-            <?php endforeach; ?>
-            </ul>
-        <?php else: ?>
-            <p>Vous n'avez écrit aucun article pour l'instant.</p>
-        <?php endif; ?>
+            </li>
+        <?php endforeach; ?>
+        </ul>
+    <?php else: ?>
+        <p>Vous n'avez écrit aucun article pour l'instant.</p>
+    <?php endif; ?>
 </body>
 </html>
