@@ -2,7 +2,7 @@
 
 ## Projet: Plateforme de partage de conseils et d'astuces pour la vie quotidienne
 
-## Objectifs
+### Objectifs
 Créer une interface conviviale pour naviguer à travers les conseils.
 Permettre aux utilisateurs de soumettre leurs propres conseils.
 Mettre en place un système de notation et de commentaires.
