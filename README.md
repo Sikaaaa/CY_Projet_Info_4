@@ -35,3 +35,11 @@ Fonctionnalités
 - Permet de créer un compte, ou de se connecter si on en a déja un
 
 ### Possibilité de se deconnecter (decconexion.php)
+
+
+## 3-Fichiers utilisés
+
+- #### css/styles.css: Styles pour la plateforme
+- #### accueil.php : Page d'accueil de la plateforme
+- #### connexion.php: Page de connexion des utilisateurs.
+- ####
