@@ -11,21 +11,21 @@ Fonctionnalités
 
 ## Page d'accueil
 
-Affichage des conseils les plus récents.
-Barre de recherche par mot-clé, catégorie, etc.
+- Affichage des conseils les plus récents.
+- Barre de recherche par mot-clé, catégorie, etc.
 
-##Page de conseils
+## Page de conseils
 
-Liste de conseils avec titres, résumés et auteurs.
-Pagination pour naviguer facilement.
-Page de conseil détaillé
+- Liste de conseils avec titres, résumés et auteurs.
+- Pagination pour naviguer facilement.
+## Page de conseil détaillé
 
-Affichage détaillé avec instructions, images, vidéos et commentaires.
+- Affichage détaillé avec instructions, images, vidéos et commentaires.
 
 ## Page de soumission de conseil
 
-Formulaire interactif pour soumettre des conseils (titre, catégorie, instructions, images, vidéos).
+- Formulaire interactif pour soumettre des conseils (titre, catégorie, instructions, images, vidéos).
 
 ## Page de profil utilisateur
 
-Création et gestion de profil avec statistiques de contributions.
+- Création et gestion de profil avec statistiques de contributions.
