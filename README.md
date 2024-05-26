@@ -9,12 +9,13 @@ Mettre en place un système de notation et de commentaires.
 Encourager l'interaction et le partage d'expériences.
 Fonctionnalités
 
-### Page d'accueil
+## 2-Fonctionnalité
+### Page d'accueil (accueil.php)
 
 - Affichage des conseils les plus récents.
-- Barre de recherche par mot-clé, catégorie, etc.
+- Barre de recherche par mot-clé, catégorie, etc. (recherche.php)
 
-### Page de conseils
+### Page de conseils (conseil.php)
 
 - Liste de conseils avec titres, résumés et auteurs.
 - Pagination pour naviguer facilement.
@@ -26,6 +27,11 @@ Fonctionnalités
 
 - Formulaire interactif pour soumettre des conseils (titre, catégorie, instructions, images, vidéos).
 
-### Page de profil utilisateur
+### Page de profil utilisateur (profil.php)
 
 - Création et gestion de profil avec statistiques de contributions.
+
+### Page de connexion et d'inscription (inscription.php et connexion.php)
+- Permet de créer un compte, ou de se connecter si on en a déja un
+
+### Possibilité de se deconnecter (decconexion.php)
