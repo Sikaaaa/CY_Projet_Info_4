@@ -39,7 +39,7 @@ Fonctionnalités
 
 ## 3-Fichiers utilisés
 
-- #### css/styles.css: Styles pour la plateforme
-- #### accueil.php : Page d'accueil de la plateforme
+- [css/styles.css](./css/style.css): Styles pour la plateforme
+- [accueil.php](./accueil.php) : Page d'accueil de la plateforme
 - [connexion.php](./connexion.php): Page de connexion des utilisateurs.
 - ####
