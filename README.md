@@ -41,5 +41,5 @@ Fonctionnalités
 
 - #### css/styles.css: Styles pour la plateforme
 - #### accueil.php : Page d'accueil de la plateforme
-- #### connexion.php: Page de connexion des utilisateurs.
+- [connexion.php](./connexion.php): Page de connexion des utilisateurs.
 - ####
