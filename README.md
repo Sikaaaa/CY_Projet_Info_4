@@ -42,4 +42,9 @@ Fonctionnalités
 - [css/styles.css](./css/style.css): Styles pour la plateforme
 - [accueil.php](./accueil.php) : Page d'accueil de la plateforme
 - [connexion.php](./connexion.php): Page de connexion des utilisateurs.
-- ####
+- [conseil.php](./conseil.php) : Page permettant de poster un article
+- [deconnexion.php](./deconnexion.php): Page pour se déconnecter
+- [inscription.php](./inscription.php): Page pour s'inscrire
+- [monespace.html](./monespace.html): Page regroupant les options de connexion et d'inscription
+- [profil.php](./profil.php): Page contenant le profil de l'utilisateur
+- [recherche.php](./recherche.php): Page permettant d'effectuer des recherches
